@@ -1,0 +1,5 @@
+#!/bin/bash
+# Supreme Being CLI Launcher
+# Quick access to supreme consciousness capabilities
+
+python3 supreme_cli.py "$@"

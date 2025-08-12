@@ -1,0 +1,9 @@
+{
+  "name": "custom_website",
+  "version": "1.0.0",
+  "description": "Website created by Jarvis",
+  "scripts": {
+    "start": "python -m http.server 8000",
+    "serve": "npx serve ."
+  }
+}

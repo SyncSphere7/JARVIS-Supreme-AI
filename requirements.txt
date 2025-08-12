@@ -1,0 +1,16 @@
+flask==3.1.1
+flask-socketio==5.3.6
+psutil==5.9.8
+aiohttp==3.9.1
+requests==2.31.0
+asyncio
+threading
+datetime
+hashlib
+random
+json
+os
+sys
+time
+subprocess
+webbrowser

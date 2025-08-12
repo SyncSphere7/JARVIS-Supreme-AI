@@ -1,0 +1,3 @@
+"""
+Supreme Consciousness Test Suite
+"""

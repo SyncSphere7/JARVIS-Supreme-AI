@@ -1,0 +1,7 @@
+{
+  "backend": "cloud",
+  "local_model_path": "/Users/syncsphere/Jarvis/models/dolphin-2_6-phi-2.Q4_K_M.gguf",
+  "n_threads": 2,
+  "n_ctx": 512
+}
+
