@@ -48,6 +48,12 @@ static/
 *.log
 *.pid
 
+# Model Files
+models/
+*.gguf
+*.bin
+*.safetensors
+
 # Sensitive Data
 *.key
 *.pem
@@ -57,6 +63,12 @@ secrets.json
 # State Files
 core/supreme_being/supreme_state.json
 core/supreme_being/enhancement_state.json
+
+# Large Model Files
+models/
+*.gguf
+*.bin
+*.safetensors
 
 # Temporary Files
 *.tmp
