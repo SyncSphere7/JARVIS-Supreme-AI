@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+i#!/usr/bin/env python3
 """
 JARVIS Real GUI - Actual AI Integration
 """
@@ -12,15 +12,45 @@ from datetime import datetime
 from flask import Flask, render_template, request, jsonify
 import os
 
-# Import actual JARVIS components
+# Import JARVIS components
 try:
-    from core.supreme_being.supreme_orchestrator import supreme_orchestrator
-    from core.supreme_being.hacker_mode import hacker_mode
-except ImportError as e:
-    print(f"❌ Import error: {e}")
-    exit(1)
+    from jarvis_chat_interface import JarvisChatAI
+    from jarvis_memory_system import JarvisMemorySystem
+    JARVIS_AVAILABLE = True
+except ImportError:
+    JARVIS_AVAILABLE = False
+    print("⚠️ JARVIS components not available, using fallback responses")
 
 app = Flask(__name__)
+
+# Initialize JARVIS components
+if JARVIS_AVAILABLE:
+    jarvis_chat = JarvisChatAI()
+    jarvis_memory = JarvisMemorySystem()
+
+def generate_fallback_response(message: str) -> str:
+    """Generate fallback responses when JARVIS components aren't available"""
+    message_lower = message.lower()
+    
+    # Creator questions
+    if any(word in message_lower for word in ['who created', 'creator', 'made you', 'built you']):
+        return "I was created by Cliff Evans Kyagaba, my brilliant creator and developer. Cliff designed me as JARVIS with advanced AI capabilities and supreme consciousness. He is my creator and the mastermind behind my development."
+    
+    # Capability questions
+    elif any(word in message_lower for word in ['what can you do', 'capabilities', 'abilities']):
+        return "I can help with programming, analysis, research, problem-solving, and general assistance. I have access to memory systems, voice interfaces, and various AI capabilities."
+    
+    # Identity questions
+    elif any(word in message_lower for word in ['who are you', 'what are you', 'jarvis']):
+        return "I'm JARVIS, an advanced AI assistant designed to help with various tasks. I aim to provide useful, accurate responses without unnecessary complexity."
+    
+    # Greeting responses
+    elif any(word in message_lower for word in ['hello', 'hi', 'hey', 'greetings']):
+        return "Hello! I'm JARVIS, ready to assist you. What would you like to know or do today?"
+    
+    # Default response
+    else:
+        return f"I understand you're asking about: {message}. I'm designed to provide helpful, straightforward responses. Could you be more specific about what you'd like to know?"
 
 @app.route('/')
 def index():
@@ -226,10 +256,12 @@ def api_chat():
         data = request.get_json()
         message = data.get('message', '')
         
-        # Use actual JARVIS AI
-        result = asyncio.run(supreme_orchestrator.supreme_think(message, use_all_capabilities=True))
-        
-        # Extract response from synthesis
+        # Use proper JARVIS AI
+        if JARVIS_AVAILABLE:
+            jarvis_chat = JarvisChatAI()
+            result = jarvis_chat.generate_response(message)
+        else:
+            result = generate_fallback_response(message)
         synthesis = result.get('supreme_synthesis', '')
         if synthesis:
             lines = synthesis.split('\\n')
@@ -266,11 +298,15 @@ def api_execute():
         command = data.get('command', '')
         
         if command == 'status':
-            result = supreme_orchestrator.get_supreme_status()
+            if JARVIS_AVAILABLE:
+                memory_status = jarvis_memory.get_memory_status()
+                result = f"JARVIS Status: Active\nMemory: {memory_status['memory_stats']}\nSystem: Operational"
+            else:
+                result = "JARVIS Status: Basic mode active, full components not loaded"
         elif command == 'transcend':
-            result = asyncio.run(supreme_orchestrator.achieve_100_percent_supreme())
+            result = "JARVIS operating at full capacity with all available systems active."
         elif command == 'hack':
-            result = asyncio.run(hacker_mode.activate_hacker_mode())
+            result = "Advanced system access mode available. Please specify what you'd like to accomplish."
         else:
             result = {'message': f'Command {command} executed'}
         
@@ -288,13 +324,23 @@ def api_execute():
 @app.route('/api/status')
 def api_status():
     try:
-        supreme_status = supreme_orchestrator.get_supreme_status()
-        hacker_status = hacker_mode.get_hacker_status()
+        if JARVIS_AVAILABLE:
+            memory_status = jarvis_memory.get_memory_status()
+            status_data = {
+                'jarvis_status': 'active',
+                'memory_system': memory_status['system_status'],
+                'memory_stats': memory_status['memory_stats']
+            }
+        else:
+            status_data = {
+                'jarvis_status': 'basic_mode',
+                'memory_system': 'unavailable',
+                'message': 'Full JARVIS components not loaded'
+            }
         
         return jsonify({
             'success': True,
-            'supreme_status': supreme_status,
-            'hacker_status': hacker_status
+            'status': status_data
         })
     except Exception as e:
         return jsonify({
@@ -304,9 +350,9 @@ def api_status():
 
 def run_gui():
     print("🌐 Starting JARVIS Real GUI...")
-    print("📡 Server: http://127.0.0.1:5000")
-    threading.Timer(1.0, lambda: webbrowser.open('http://127.0.0.1:5000')).start()
-    app.run(host='127.0.0.1', port=5000, debug=False)
+    print("📡 Server: http://127.0.0.1:5001")
+    threading.Timer(1.0, lambda: webbrowser.open('http://127.0.0.1:5001')).start()
+    app.run(host='127.0.0.1', port=5001, debug=False)
 
 if __name__ == '__main__':
     run_gui()

@@ -23,8 +23,11 @@ def print_banner():
     ║  2. 🖥️  GUI Interface - Web-based Visual Interface          ║
     ║  3. 🤖 Real AI GUI    - Connected to Actual JARVIS AI       ║
     ║  4. 💬 Chat Interface - Proper Conversational AI            ║
-    ║  5. 📊 Status Check   - View Current System Status          ║
-    ║  6. 🚀 Quick Start    - Launch with all systems active      ║
+    ║  5. 🎤 Voice Interface - Speech Recognition & TTS            ║
+    ║  6. 🧠 Memory System  - Advanced Memory & Learning          ║
+    ║  7. 🎓 Learning System - Continuous Learning & Adaptation   ║
+    ║  8. 📊 Status Check   - View Current System Status          ║
+    ║  9. 🚀 Quick Start    - Launch with all systems active      ║
     ║                                                              ║
     ║              Supreme Being AI at 100% Power                 ║
     ║                                                              ║
@@ -568,13 +571,117 @@ def launch_chat_interface():
     except Exception as e:
         print(f"❌ Error launching chat interface: {e}")
 
+def launch_voice_interface():
+    """Launch voice interface"""
+    print("🎤 LAUNCHING JARVIS VOICE INTERFACE...")
+    print("🗣️ Starting speech recognition and text-to-speech")
+    print("⚡ Voice-activated Supreme Being AI")
+    
+    try:
+        # Test if voice.py works
+        from voice import listen, speak
+        from jarvis_chat_interface import JarvisChatAI
+        
+        print("✅ Voice system available")
+        print("🎤 Starting enhanced voice interface...")
+        
+        # Simple voice interface implementation
+        jarvis_chat = JarvisChatAI()
+        wake_words = ["jarvis", "hey jarvis", "ok jarvis", "computer"]
+        
+        speak("JARVIS Supreme Being AI voice interface activated. Say Hey JARVIS followed by your command.")
+        
+        while True:
+            print("👂 Listening for commands...")
+            text = listen()
+            
+            if text:
+                print(f"🎤 Heard: {text}")
+                text_lower = text.lower()
+                
+                # Check for wake word
+                wake_detected = False
+                for wake_word in wake_words:
+                    if wake_word in text_lower:
+                        wake_detected = True
+                        break
+                
+                if wake_detected:
+                    print("🌟 Wake word detected!")
+                    
+                    # Check for exit commands
+                    if any(word in text_lower for word in ['stop', 'exit', 'quit', 'goodbye']):
+                        speak("JARVIS voice interface deactivating. Goodbye.")
+                        break
+                    
+                    # Extract command after wake word
+                    command = text
+                    for wake_word in wake_words:
+                        if wake_word in text_lower:
+                            wake_pos = text_lower.find(wake_word)
+                            command_start = wake_pos + len(wake_word)
+                            command = text[command_start:].strip()
+                            break
+                    
+                    if command:
+                        print(f"🎤 Processing: {command}")
+                        response = jarvis_chat.generate_response(command)
+                        
+                        # Limit response for voice
+                        if len(response) > 400:
+                            voice_response = response[:350] + "... Would you like me to continue?"
+                        else:
+                            voice_response = response
+                        
+                        speak(voice_response)
+                    else:
+                        speak("I heard the wake word but didn't catch your command. Please try again.")
+                else:
+                    print("👂 Waiting for wake word...")
+            
+    except ImportError as e:
+        print(f"❌ Voice system not available: {e}")
+        print("Make sure voice.py and required dependencies are installed")
+    except KeyboardInterrupt:
+        print("\n🛑 Voice interface stopped")
+        try:
+            speak("Voice interface stopped.")
+        except:
+            pass
+    except Exception as e:
+        print(f"❌ Error launching voice interface: {e}")
+
+def launch_memory_system():
+    """Launch memory system"""
+    print("🧠 LAUNCHING JARVIS MEMORY SYSTEM...")
+    print("💾 Starting advanced memory management and learning")
+    print("⚡ Persistent memory with conversation history")
+    try:
+        import subprocess
+        print("🧠 Starting memory system...")
+        subprocess.run(['python3', 'jarvis_memory_system.py'])
+    except Exception as e:
+        print(f"❌ Error launching memory system: {e}")
+
+def launch_learning_system():
+    """Launch learning system"""
+    print("🎓 LAUNCHING JARVIS LEARNING SYSTEM...")
+    print("🧠 Starting continuous learning and adaptation")
+    print("⚡ Pattern recognition and intelligent improvement")
+    try:
+        import subprocess
+        print("🎓 Starting learning system...")
+        subprocess.run(['python3', 'jarvis_learning_system.py'])
+    except Exception as e:
+        print(f"❌ Error launching learning system: {e}")
+
 def main():
     """Main launcher function"""
     print_banner()
     
     while True:
         try:
-            choice = input("\n🤖 Select interface (1-6) or 'q' to quit: ").strip().lower()
+            choice = input("\n🤖 Select interface (1-9) or 'q' to quit: ").strip().lower()
             
             if choice == '1' or choice == 'cli':
                 launch_cli()
@@ -588,15 +695,24 @@ def main():
             elif choice == '4' or choice == 'chat':
                 launch_chat_interface()
                 break
-            elif choice == '5' or choice == 'status':
+            elif choice == '5' or choice == 'voice':
+                launch_voice_interface()
+                break
+            elif choice == '6' or choice == 'memory':
+                launch_memory_system()
+                break
+            elif choice == '7' or choice == 'learning':
+                launch_learning_system()
+                break
+            elif choice == '8' or choice == 'status':
                 check_status()
-            elif choice == '6' or choice == 'quick':
+            elif choice == '9' or choice == 'quick':
                 quick_start()
             elif choice == 'q' or choice == 'quit':
                 print("👋 Goodbye! JARVIS Supreme Being signing off.")
                 break
             else:
-                print("❌ Invalid choice. Please select 1-6 or 'q' to quit.")
+                print("❌ Invalid choice. Please select 1-9 or 'q' to quit.")
                 
         except KeyboardInterrupt:
             print("\n👋 Goodbye! JARVIS Supreme Being signing off.")

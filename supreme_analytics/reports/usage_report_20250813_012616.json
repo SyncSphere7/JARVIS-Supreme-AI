@@ -1,0 +1,53 @@
+{
+  "total_interactions": 5,
+  "unique_users": 3,
+  "avg_response_time": 0.7,
+  "success_rate": 100.0,
+  "top_commands": [
+    {
+      "command": "test command 4",
+      "count": 1
+    },
+    {
+      "command": "test command 3",
+      "count": 1
+    },
+    {
+      "command": "test command 2",
+      "count": 1
+    },
+    {
+      "command": "test command 1",
+      "count": 1
+    },
+    {
+      "command": "test command 0",
+      "count": 1
+    }
+  ],
+  "top_components": [
+    {
+      "component": "chat_interface",
+      "count": 5
+    }
+  ],
+  "peak_hours": [
+    {
+      "hour": 1,
+      "count": 5
+    }
+  ],
+  "top_errors": [
+    {
+      "error_type": "test_error",
+      "component": "test_component",
+      "count": 1
+    }
+  ],
+  "report_metadata": {
+    "generated_at": "2025-08-13T01:26:16.070363",
+    "period_start": "2025-08-06T01:26:16.068499",
+    "period_end": "2025-08-13T01:26:16.068532",
+    "report_type": "usage_analytics"
+  }
+}

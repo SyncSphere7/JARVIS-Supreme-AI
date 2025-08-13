@@ -1,0 +1,127 @@
+{
+  "total_interactions": 60,
+  "unique_users": 8,
+  "avg_response_time": 1.142,
+  "success_rate": 88.33,
+  "top_commands": [
+    {
+      "command": "send email",
+      "count": 8
+    },
+    {
+      "command": "store knowledge",
+      "count": 6
+    },
+    {
+      "command": "get weather",
+      "count": 6
+    },
+    {
+      "command": "automate task",
+      "count": 5
+    },
+    {
+      "command": "translate text",
+      "count": 4
+    },
+    {
+      "command": "search the internet",
+      "count": 4
+    },
+    {
+      "command": "schedule meeting",
+      "count": 4
+    },
+    {
+      "command": "calculate result",
+      "count": 4
+    },
+    {
+      "command": "remember my preferences",
+      "count": 3
+    },
+    {
+      "command": "reason about problem",
+      "count": 3
+    }
+  ],
+  "top_components": [
+    {
+      "component": "reasoning_system",
+      "count": 12
+    },
+    {
+      "component": "internet_system",
+      "count": 11
+    },
+    {
+      "component": "chat_interface",
+      "count": 10
+    },
+    {
+      "component": "multilang_system",
+      "count": 9
+    },
+    {
+      "component": "learning_system",
+      "count": 7
+    },
+    {
+      "component": "automation_system",
+      "count": 6
+    },
+    {
+      "component": "memory_system",
+      "count": 5
+    }
+  ],
+  "peak_hours": [
+    {
+      "hour": 1,
+      "count": 60
+    }
+  ],
+  "top_errors": [
+    {
+      "error_type": "operation_failed",
+      "component": "multilang_system",
+      "count": 2
+    },
+    {
+      "error_type": "test_error",
+      "component": "test_component",
+      "count": 2
+    },
+    {
+      "error_type": "operation_failed",
+      "component": "automation_system",
+      "count": 1
+    },
+    {
+      "error_type": "operation_failed",
+      "component": "internet_system",
+      "count": 1
+    },
+    {
+      "error_type": "operation_failed",
+      "component": "learning_system",
+      "count": 1
+    },
+    {
+      "error_type": "operation_failed",
+      "component": "memory_system",
+      "count": 1
+    },
+    {
+      "error_type": "operation_failed",
+      "component": "reasoning_system",
+      "count": 1
+    }
+  ],
+  "report_metadata": {
+    "generated_at": "2025-08-13T01:32:52.888729",
+    "period_start": "2025-08-06T01:32:52.885900",
+    "period_end": "2025-08-13T01:32:52.885940",
+    "report_type": "usage_analytics"
+  }
+}
